@@ -1,5 +1,5 @@
-import { combineReducers, AnyAction, Reducer } from 'redux';
-import locale, { LocaleState } from './slices/locale/localeSlice';
+import { combineReducers, AnyAction, Reducer } from "redux";
+import locale, { LocaleState } from "./slices/locale/localeSlice";
 
 export interface RootState {
   locale: LocaleState;
@@ -13,7 +13,9 @@ const staticReducers = {
   locale,
 };
 
-const rootReducer = (asyncReducers: AsyncReducers = {}): Reducer<RootState, AnyAction> => {
+const rootReducer = (
+  asyncReducers: AsyncReducers = {}
+): Reducer<RootState, AnyAction> => {
   return combineReducers({
     ...staticReducers,
     ...asyncReducers,

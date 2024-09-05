@@ -1,43 +1,26 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import './HotelList.css';
-import { getHotels } from '@/app/services/tasks.service';
-import Loading from '@/app/components/Loading/Loading';
-
-interface Hotel {
-  id: number;
-  name: string;
-}
-
-interface FetchHotelsResponse {
-  success: boolean;
-  error: string;
-  result: Hotel[];
-}
+import React, { useState, useEffect } from "react";
+import Loading from "@/app/components/Loading/Loading";
+import CardItem from "@/app/components/HotelCardItem/CardItem";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { fetchHotels } from "../store";
+import "./HotelList.css";
 
 const Hotels: React.FC = () => {
-  const [hotels, setHotels] = useState<Hotel[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const dispatch = useDispatch();
+
+  const loading = useSelector((state: any) => state.hotelsList.data.loading);
+  const data = useSelector((state: any) => state.hotelsList.data.list);
   const [error, setError] = useState<string | null>(null);
 
   const fetchData = async () => {
-    setLoading(true);
+    dispatch(fetchHotels() as any);
     try {
-      const response = await getHotels();
-      const { success, error, result } = response.data as FetchHotelsResponse;
-
-
-      console.log(response)
-      if (!success) {
-        throw new Error(error);
-      }
-
-      setHotels(result);
     } catch (error) {
-      setError('Failed to fetch hotels');
+      setError("Failed to fetch hotels");
     } finally {
-      setLoading(false);
     }
   };
 
@@ -46,19 +29,22 @@ const Hotels: React.FC = () => {
   }, []);
 
   return (
-      <div className="hotel-list">
-        {loading ? (
-         <Loading/>
-        ) : error ? (
-          <p>{error}</p>
-        ) : (
-          hotels.map(hotel => (
-            <div key={hotel.id} className="hotel-card">
-              <h2>{hotel.name}</h2>
-            </div>
-          ))
-        )}
-      </div>
+    <div className="hotel-list">
+      {loading ? (
+        <Loading />
+      ) : error ? (
+        <p>{error}</p>
+      ) : (
+        data.map((hotel: any, index) => (
+          <CardItem
+            key={index}
+            imageUrl={hotel?.images[0]?.url}
+            name={hotel?.name}
+            city={hotel?.city}
+          />
+        ))
+      )}
+    </div>
   );
 };
 
