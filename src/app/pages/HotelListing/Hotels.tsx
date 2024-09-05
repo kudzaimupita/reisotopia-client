@@ -24,7 +24,7 @@ const Hotels: React.FC = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await getHotels({});
+      const response = await getHotels();
       const { success, error, result } = response.data as FetchHotelsResponse;
 
 
