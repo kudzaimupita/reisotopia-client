@@ -5,8 +5,8 @@ export const SLICE_NAME = "hotelsList";
 
 export const fetchHotels = createAsyncThunk(
   SLICE_NAME + "/getHotels",
-  async () => {
-    const response: any = await getHotels();
+  async (params) => {
+    const response: any = await getHotels(params);
     return response.data;
   }
 );
@@ -19,10 +19,7 @@ const initialState = {
     pageIndex: 1,
     pageSize: 10,
     query: "",
-    sort: {
-      order: "",
-      key: "",
-    },
+    sort: "",
   },
 };
 
@@ -36,11 +33,22 @@ const hotelsListSlice = createSlice({
     setTableData: (state, action) => {
       state.tableData = action.payload;
     },
+    setQuery: (state, action) => {
+      state.tableData.query = action.payload;
+    },
+
+    setSort: (state, action) => {
+      state.tableData.sort = action.payload;
+    },
+    setPageNumber: (state, action) => {
+      state.tableData.pageIndex = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchHotels.fulfilled, (state, action) => {
-        state.list = action.payload.result;
+        state.list = action.payload.result.hotels;
+        state.tableData.total = action.payload.result.totalPages;
         state.loading = false;
       })
       .addCase(fetchHotels.pending, (state) => {
@@ -49,6 +57,7 @@ const hotelsListSlice = createSlice({
   },
 });
 
-export const { setHotelsList, setTableData } = hotelsListSlice.actions;
+export const { setHotelsList, setTableData, setQuery, setPageNumber, setSort } =
+  hotelsListSlice.actions;
 
 export default hotelsListSlice.reducer;

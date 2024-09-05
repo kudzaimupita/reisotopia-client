@@ -25,17 +25,11 @@ https://reisotopia-client.vercel.app/
 #### TODO:
 
 - Style hotel card
-- Continue with unit tests for some utils and integration tests
 - Add breaking points and responsiveness for navbar, footer and list
-- Add pagination
-- Add filtering by name
-- Add sorting
-- Add language selector
-- better styling for container
 - better styling for navbar and footer
 - env for base url (prod and local dev)
+- Filter by minimum price range (e.g. 300-400)
 - fix types
-- add memoization
-- add lazy loading
+- Filter by distance to center (e.g. "max. 3 km")
 
 🎉 Thanks!
