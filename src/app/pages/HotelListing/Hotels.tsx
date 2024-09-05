@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import './HotelList.css';
 import { getHotels } from '@/app/services/tasks.service';
+import Loading from '@/app/components/Loading/Loading';
 
 interface Hotel {
   id: number;
@@ -47,7 +48,7 @@ const Hotels: React.FC = () => {
   return (
       <div className="hotel-list">
         {loading ? (
-          <p>Loading...</p>
+         <Loading/>
         ) : error ? (
           <p>{error}</p>
         ) : (
