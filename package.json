@@ -16,6 +16,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-redux": "8.0.5",
+    "redux": "^5.0.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0"
   },
@@ -23,6 +24,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-redux": "^7.1.33",
     "typescript": "^5"
   }
 }
