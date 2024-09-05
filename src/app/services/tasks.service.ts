@@ -1,9 +1,8 @@
 import ApiService from './ApiService'
 
-export async function getHotels(params: never) {
+export async function getHotels() {
     return ApiService.fetchData({
         url: '/recruiting/hotels',
-        method: 'get',
-        params,
+        method: 'get'
     })
 }
