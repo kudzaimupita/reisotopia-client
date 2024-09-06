@@ -39,7 +39,7 @@ const initialState: HotelsState = {
     query: "",
     sort: "",
     minPrice: 0,
-    maxPrice: 300,
+    maxPrice: 500,
   },
 };
 

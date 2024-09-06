@@ -45,7 +45,7 @@ const Toolbar: React.FC = () => {
         <label>Min Price By:</label>
         <Slider
           minRange={0}
-          maxRange={300}
+          maxRange={500}
           step={50}
           initialMinValue={minPrice}
           initialMaxValue={maxPrice}
