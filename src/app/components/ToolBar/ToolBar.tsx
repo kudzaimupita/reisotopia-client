@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import SortBy from "../SortBy/SortBy";
 import { useDispatch } from "react-redux";
-import { setQuery, setSort } from "@/app/pages/store";
+import { setPriceRange, setQuery, setSort } from "@/app/pages/store";
+import Slider from "../Slider/Slider";
+import { RootState } from "@/app/store";
+import { useAppSelector } from "@/app/store/hook";
 import "./Toolbar.css";
 
 const debounce = (func: Function, delay: number) => {
@@ -14,15 +17,19 @@ const debounce = (func: Function, delay: number) => {
 
 const Toolbar: React.FC = () => {
   const dispatch = useDispatch();
-  const [destination, setDestination] = useState<string>("");
+  const [name, setName] = useState<string>("");
+
+  const { sort, minPrice, maxPrice } = useAppSelector(
+    (state: RootState) => state.hotelsList.data.tableData
+  );
 
   const debouncedSearch = debounce((query: string) => {
     dispatch(setQuery(query));
-  }, 500);
+  }, 300);
 
   useEffect(() => {
-    debouncedSearch(destination);
-  }, [destination]);
+    debouncedSearch(name);
+  }, [name]);
 
   return (
     <div className="search-bar">
@@ -30,12 +37,26 @@ const Toolbar: React.FC = () => {
         <label>Search Name:</label>
         <input
           type="text"
-          value={destination}
-          onChange={(e) => setDestination(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           placeholder="Where are you going?"
         />
       </div>
+      <div className="search-bar-field">
+        <label>Min Price By:</label>
+        <Slider
+          minRange={0}
+          maxRange={300}
+          step={50}
+          initialMinValue={minPrice}
+          initialMaxValue={maxPrice}
+          onChange={(minPrice, maxPrice) =>
+            dispatch(setPriceRange({ minPrice, maxPrice }))
+          }
+        />
+      </div>
       <SortBy
+        selectedOption={sort}
         onSortChange={(value) => dispatch(setSort(value))}
         options={[
           { value: "name-asc", label: "Name A-Z" },

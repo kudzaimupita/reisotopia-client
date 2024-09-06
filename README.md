@@ -24,12 +24,9 @@ https://reisotopia-client.vercel.app/
 
 #### TODO:
 
-- Style hotel card
 - Add breaking points and responsiveness for navbar, footer and list
-- better styling for navbar and footer
-- env for base url (prod and local dev)
-- Filter by minimum price range (e.g. 300-400)
-- fix types
+- better styling for navbar and footer, also remove padding on app body
+- fix range slider Bug with the cursor while dragging the slider thumbs
 - Filter by distance to center (e.g. "max. 3 km")
 
 🎉 Thanks!

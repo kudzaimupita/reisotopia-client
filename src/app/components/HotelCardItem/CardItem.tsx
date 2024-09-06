@@ -1,5 +1,6 @@
 import React from "react";
 import "./CardItem.css";
+import Button from "../Button/Button";
 
 interface CardItemProps {
   imageUrl: string;
@@ -26,6 +27,7 @@ const CardItem: React.FC<CardItemProps> = ({
         <h2 style={{ width: "300px" }}>{name || "--"}</h2>
         <p>{address || "--"}</p>
         <h4>Center: {distanceToCenter.toFixed(2)}km</h4>
+        <Button label="Book Now" />
       </div>
     </div>
   );

@@ -20,5 +20,4 @@ export const useAppSelector: TypedUseSelectorHook<
 > = useSelector;
 
 export * from "./hotelListSlice";
-// export { useAppDispatch } from "@/app/store";
 export default reducer;

@@ -1,18 +1,9 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import "./Navbar.css";
 import Logo from "../Logo/Logo";
-import { setLang } from "@/app/store";
-import { useSelector } from "react-redux";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
 
-const Navbar = () => {
-  const dispatch = useDispatch();
-  const lang = useSelector((state: any) => state.locale.currentLang);
-  const handleLangChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setLang(event.target.value));
-  };
-
+const Navbar: React.FC = () => {
   return (
     <>
       <nav className="navbar">

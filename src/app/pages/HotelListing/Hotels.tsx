@@ -3,58 +3,63 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Loading from "@/app/components/Loading/Loading";
 import CardItem from "@/app/components/HotelCardItem/CardItem";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import { fetchHotels, setPageNumber } from "../store";
-import "./HotelList.css";
 import Toolbar from "@/app/components/ToolBar/ToolBar";
 import Pagination from "@/app/components/Pagination/Pagination";
+import { RootState } from "@/app/store";
+import { Hotel } from "../store/types";
+import "./HotelList.css";
+import { useAppDispatch, useAppSelector } from "@/app/store/hook";
 
 const Hotels: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const loading = useSelector((state: any) => state.hotelsList.data.loading);
-  const data = useSelector((state: any) => state.hotelsList.data.list);
-  const lang = useSelector((state: any) => state.locale.currentLang);
+  const loading = useAppSelector(
+    (state: RootState) => state.hotelsList.data.loading
+  );
+  const data = useAppSelector((state: RootState) => state.hotelsList.data.list);
+  const lang = useAppSelector((state: RootState) => state.locale.currentLang);
+  const { pageIndex, pageSize, sort, query, total, minPrice, maxPrice } =
+    useAppSelector((state: RootState) => state.hotelsList.data.tableData);
 
   const [error, setError] = useState<string | null>(null);
-
-  const { pageIndex, pageSize, sort, query, total } = useSelector(
-    (state: any) => state.hotelsList.data.tableData
-  );
 
   const fetchData = useCallback(() => {
     dispatch(
       fetchHotels({
-        pageNumber: pageIndex,
+        pageIndex,
         pageSize,
         sort,
-        search: query,
+        query,
         lang,
+        minPrice,
+        maxPrice,
       })
-    );
-  }, [dispatch, pageIndex, pageSize, sort, query, lang]);
+    ).catch(() => {
+      setError("Error fetching hotels");
+    });
+  }, [dispatch, pageIndex, pageSize, sort, query, lang, minPrice, maxPrice]);
 
   const tableData = useMemo(
     () => ({ pageIndex, pageSize, sort, query, total }),
-    [pageIndex, pageSize, sort, query]
+    [pageIndex, pageSize, sort, query, total]
   );
 
   useEffect(() => {
     fetchData();
-  }, [dispatch, fetchData, pageIndex, pageSize, sort]);
+  }, [fetchData]);
 
   return (
     <>
       <div className="hotel-list">
+        {" "}
         <Toolbar />
-
         {loading ? (
           <Loading />
         ) : error ? (
           <p>{error}</p>
         ) : (
-          data.map((hotel: any, index) => (
+          data.map((hotel: Hotel, index: number) => (
             <CardItem
               key={index}
               imageUrl={hotel?.firstImage?.url}
