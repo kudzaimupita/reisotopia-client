@@ -5,7 +5,6 @@ import { setPriceRange, setQuery, setSort } from "@/app/pages/store";
 import Slider from "../Slider/Slider";
 import { RootState } from "@/app/store";
 import { useAppSelector } from "@/app/store/hook";
-import "./Toolbar.css";
 
 const debounce = (func: Function, delay: number) => {
   let timer: NodeJS.Timeout;
