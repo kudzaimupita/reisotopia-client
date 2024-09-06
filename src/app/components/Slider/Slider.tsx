@@ -21,8 +21,16 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
   const [minValue, setMinValue] = useState<number>(initialMinValue);
   const [maxValue, setMaxValue] = useState<number>(initialMaxValue);
   const sliderRef = useRef<HTMLDivElement>(null);
+  const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const snapToStep = (value: number): number => Math.round(value / step) * step;
+
+  const debounce = (callback: () => void, delay: number) => {
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
+    }
+    debounceTimeout.current = setTimeout(callback, delay);
+  };
 
   const handleMouseDown = useCallback(
     (e: MouseEvent, type: "min" | "max") => {
@@ -49,11 +57,15 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
         if (type === "min") {
           const updatedMinValue = Math.min(newValue, maxValue - step);
           setMinValue(updatedMinValue);
-          if (onChange) onChange(updatedMinValue, maxValue);
+          debounce(() => {
+            if (onChange) onChange(updatedMinValue, maxValue);
+          }, 300);
         } else if (type === "max") {
           const updatedMaxValue = Math.max(newValue, minValue + step);
           setMaxValue(updatedMaxValue);
-          if (onChange) onChange(minValue, updatedMaxValue);
+          debounce(() => {
+            if (onChange) onChange(minValue, updatedMaxValue);
+          }, 300);
         }
       };
 
