@@ -6,7 +6,7 @@
 
 .slider-track {
   position: relative;
-  height: 6px;
+  height: 3px;
   background: #ddd;
   border-radius: 3px;
   margin: 0 10px;
@@ -14,7 +14,7 @@
 
 .slider-range {
   position: absolute;
-  height: 6px;
+  height: 3px;
   background: #007bff;
   border-radius: 3px;
   z-index: 1;
@@ -24,8 +24,8 @@
   position: absolute;
   background: #007bff;
   border: 2px solid #fff;
-  width: 20px;
-  height: 20px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   cursor: pointer;
   transform: translate(-50%, -50%);

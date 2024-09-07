@@ -41,18 +41,20 @@ const Toolbar: React.FC = () => {
           placeholder="Where are you going?"
         />
       </div>
-      <div className="search-bar-field">
+      <div className="search-bar-field" style={{ marginRight: "30px" }}>
         <label>Min Price By:</label>
-        <Slider
-          minRange={0}
-          maxRange={500}
-          step={50}
-          initialMinValue={minPrice}
-          initialMaxValue={maxPrice}
-          onChange={(minPrice, maxPrice) =>
-            dispatch(setPriceRange({ minPrice, maxPrice }))
-          }
-        />
+        <div style={{ marginTop: "10px" }}>
+          <Slider
+            minRange={0}
+            maxRange={500}
+            step={50}
+            initialMinValue={minPrice}
+            initialMaxValue={maxPrice}
+            onChange={(minPrice, maxPrice) =>
+              dispatch(setPriceRange({ minPrice, maxPrice }))
+            }
+          />
+        </div>
       </div>
       <SortBy
         selectedOption={sort}
