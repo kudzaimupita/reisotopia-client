@@ -2,30 +2,22 @@ import React from "react";
 import "./Navbar.css";
 import Logo from "../Logo/Logo";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
+import useIsMobile from "@/app/hooks/useIsMobile";
 
 const Navbar: React.FC = () => {
+  const isMobile = useIsMobile();
+
   return (
-    <>
-      <nav className="navbar">
+    <nav className="navbar">
+      {!isMobile && (
         <div className="navbar-logo">
           <Logo />
         </div>
-        <ul className="navbar-links">
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <a href="/hotels">Hotels</a>
-          </li>
-          <li>
-            <a href="/contact">Contact</a>
-          </li>
-        </ul>
-        <div className="navbar-lang">
-          <LanguageSelector />
-        </div>
-      </nav>
-    </>
+      )}
+      <div className="navbar-lang">
+        <LanguageSelector />
+      </div>
+    </nav>
   );
 };
 

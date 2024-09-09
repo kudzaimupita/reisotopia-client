@@ -5,6 +5,7 @@ import { setPriceRange, setQuery, setSort } from "@/app/pages/store";
 import Slider from "../Slider/Slider";
 import { RootState } from "@/app/store";
 import { useAppSelector } from "@/app/store/hook";
+import "./Toolbar.css";
 
 const debounce = (func: Function, delay: number) => {
   let timer: NodeJS.Timeout;
@@ -41,7 +42,7 @@ const Toolbar: React.FC = () => {
           placeholder="Where are you going?"
         />
       </div>
-      <div className="search-bar-field" style={{ marginRight: "30px" }}>
+      <div className="search-bar-field">
         <label>Min Price By:</label>
         <div style={{ marginTop: "10px" }}>
           <Slider

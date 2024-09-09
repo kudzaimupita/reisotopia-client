@@ -1,6 +1,7 @@
 import React from "react";
 import "./CardItem.css";
 import Button from "../Button/Button";
+import useIsMobile from "@/app/hooks/useIsMobile";
 
 interface CardItemProps {
   imageUrl: string;
@@ -15,6 +16,7 @@ const CardItem: React.FC<CardItemProps> = ({
   address,
   distanceToCenter,
 }) => {
+  const isMobile = useIsMobile();
   return (
     <div className="hotel-card">
       <img
@@ -24,10 +26,10 @@ const CardItem: React.FC<CardItemProps> = ({
         loading="lazy"
       />
       <div className="hotel-details">
-        <h2 style={{ width: "300px" }}>{name || "--"}</h2>
+        <h2>{name || "--"}</h2>
         <p>{address || "--"}</p>
         <h4>Center: {distanceToCenter.toFixed(2)}km</h4>
-        <Button label="Book Now" />
+        {!isMobile && <Button label="Book Now" />}
       </div>
     </div>
   );

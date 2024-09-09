@@ -27,20 +27,6 @@
   text-overflow: ellipsis;
 }
 
-.hotel-details h2 {
-  margin: 0 0 10px;
-  font-size: 18px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.hotel-details h2:nth-of-type(2) {
-  white-space: normal;
-  overflow: visible;
-  text-overflow: clip;
-}
-
 .hotel-details p {
   margin: 0;
   font-size: 12px;
