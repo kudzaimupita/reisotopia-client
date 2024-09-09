@@ -24,8 +24,7 @@ https://reisotopia-client.vercel.app/
 
 #### TODO:
 
-- Add breaking points and responsiveness for navbar, footer and list
-- better styling for navbar and footer, also remove padding on app body
+- better styling for navbar and footer
 - fix range slider Bug with the cursor while dragging the slider thumbs
 - Filter by distance to center (e.g. "max. 3 km")
 
